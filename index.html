@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Generator Script Bot WhatsApp 🚀</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen flex items-center justify-center p-6">
+
+<!-- Access Section -->
+<div id="accessSection" class="w-full max-w-md space-y-6">
+  <h1 class="text-2xl font-bold text-center">🔐 Masukkan Access Key</h1>
+  <div class="bg-white rounded shadow p-6">
+    <input type="text" id="accessInput" placeholder="Masukkan Access Key" class="w-full px-4 py-2 border rounded mb-4" />
+    <button onclick="validateAccess()" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded font-semibold">Masuk</button>
+    <p id="accessMessage" class="text-center text-sm text-red-600 mt-2 hidden"></p>
+  </div>
+</div>
+
+<!-- Auth Section -->
+<div id="authSection" class="hidden w-full max-w-md space-y-6">
+  <h1 class="text-2xl font-bold text-center">🚀 Generator Script Bot WhatsApp</h1>
+  <div class="bg-white rounded shadow p-6">
+    <div class="flex justify-center mb-4">
+      <button onclick="toggleAuth('login')" class="authTab font-semibold text-blue-600">Login</button>
+      <span class="mx-4 text-gray-400">|</span>
+      <button onclick="toggleAuth('register')" class="authTab text-gray-600">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="space-y-4">
+      <input type="text" id="loginUsername" placeholder="Username" required class="w-full px-4 py-2 border rounded" />
+      <input type="password" id="loginPassword" placeholder="Password" required class="w-full px-4 py-2 border rounded" />
+      <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded font-semibold">Login</button>
+    </form>
+
+    <!-- Register Form -->
+    <form id="registerForm" class="space-y-4 hidden">
+      <input type="text" id="registerUsername" placeholder="Username" required class="w-full px-4 py-2 border rounded" />
+      <input type="password" id="registerPassword" placeholder="Password (4-8 karakter)" required class="w-full px-4 py-2 border rounded" />
+      <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded font-semibold">Register</button>
+    </form>
+
+    <p id="authMessage" class="text-center text-sm text-red-600 mt-2 hidden"></p>
+  </div>
+</div>
+
+<!-- App Section -->
+<div id="appSection" class="hidden w-full">
+  <div class="p-6">
+    <h1 class="text-2xl font-bold text-center mb-6">🚀 Generator Script Bot WhatsApp</h1>
+
+    <!-- Tabs -->
+    <div class="mb-6">
+      <nav class="flex space-x-4 justify-center text-sm font-semibold">
+        <button onclick="showTab('tab-form')" class="tab-btn text-blue-700">🛠️ Generator</button>
+        <button onclick="showTab('tab-proses')" class="tab-btn text-gray-600">⚙️ Proses</button>
+        <button onclick="showTab('tab-done')" class="tab-btn text-gray-600">✅ Done</button>
+        <button onclick="showTab('tab-transaksi')" class="tab-btn text-gray-600">💳 Transaksi</button>
+      </nav>
+    </div>
+
+    <!-- Form Tab -->
+    <div id="tab-form" class="tab-content active">
+      <form id="botForm" class="space-y-4">
+        <input type="text" id="botName" placeholder="Nama Bot" required class="w-full px-4 py-2 rounded border" />
+        <input type="text" id="ownerNumber" placeholder="Nomor WhatsApp Owner" required class="w-full px-4 py-2 rounded border" />
+        <select id="botType" class="w-full px-4 py-2 rounded border">
+          <option value="md">Multi Device</option>
+          <option value="webhook">Webhook API</option>
+        </select>
+        <select id="loginMethod" class="w-full px-4 py-2 rounded border">
+          <option value="pairing">Support Pairing Code</option>
+          <option value="qris">Scan QRIS</option>
+        </select>
+        <select id="database" class="w-full px-4 py-2 rounded border">
+          <option value="none">Tanpa Database</option>
+          <option value="mongodb">MongoDB</option>
+          <option value="mysql">MySQL</option>
+        </select>
+        <input type="text" id="apiKey" placeholder="API Key (Opsional)" class="w-full px-4 py-2 rounded border" />
+        <fieldset class="border rounded p-4">
+          <legend class="font-semibold text-gray-700">Fitur Bot Tambahan</legend>
+          <label class="block"><input type="checkbox" class="featureCheck" value="instalpanel" /> Instal Panel</label>
+          <label class="block"><input type="checkbox" class="featureCheck" value="instaltema" /> Instal Tema</label>
+          <label class="block"><input type="checkbox" class="featureCheck" value="uninstallpanel" /> Uninstall Panel</label>
+          <label class="block"><input type="checkbox" class="featureCheck" value="uninstalltema" /> Uninstall Tema</label>
+          <label class="block"><input type="checkbox" class="featureCheck" value="subdomain" /> Subdomain</label>
+          <label class="block"><input type="checkbox" class="featureCheck" value="cpanel" /> Akses CPanel</label>
+          <label class="block"><input type="checkbox" class="featureCheck" value="domain" /> Akses Domain</label>
+        </fieldset>
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded font-semibold">Buat Script 🔧</button>
+      </form>
+      <div id="result" class="mt-6 hidden">
+        <p class="text-green-600 font-semibold text-center">✅ Script Bot berhasil dibuat!</p>
+        <a id="downloadLink" href="#" download="botwa.zip" class="mt-2 block text-center text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded">Download Script ZIP</a>
+      </div>
+    </div>
+
+    <!-- Proses Tab -->
+    <div id="tab-proses" class="tab-content">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2">⚙️ Dalam Proses</h2>
+      <ul id="prosesList" class="list-disc pl-6 text-gray-700"></ul>
+      <div id="progressContainer" class="my-4 hidden">
+        <div class="w-full bg-gray-300 rounded h-4 overflow-hidden">
+          <div id="progressBar" class="bg-blue-600 h-4 w-0 transition-all duration-500 ease-in-out"></div>
+        </div>
+        <p id="countdownTimer" class="text-sm text-gray-700 mt-2 text-center">⏳ Tunggu sebentar...</p>
+      </div>
+    </div>
+
+    <!-- Done Tab -->
+    <div id="tab-done" class="tab-content">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2">✅ Selesai</h2>
+      <ul id="doneList" class="list-disc pl-6 text-green-700"></ul>
+    </div>
+
+    <!-- Transaksi Tab -->
+    <div id="tab-transaksi" class="tab-content">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2">💳 Riwayat Transaksi</h2>
+      <ul id="transaksiList" class="list-disc pl-6 text-indigo-700"></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('text-blue-700'));
+    event.target.classList.add('text-blue-700');
+  }
+
+  function toggleAuth(type) {
+    const login = document.getElementById('loginForm');
+    const register = document.getElementById('registerForm');
+    const msg = document.getElementById('authMessage');
+    msg.classList.add('hidden');
+    if (type === 'login') {
+      login.classList.remove('hidden');
+      register.classList.add('hidden');
+    } else {
+      login.classList.add('hidden');
+      register.classList.remove('hidden');
+    }
+  }
+
+  function validateAccess() {
+    const key = document.getElementById('accessInput').value.trim();
+    const msg = document.getElementById('accessMessage');
+    if (key === 'rogerid-1956') {
+      document.getElementById('accessSection').classList.add('hidden');
+      document.getElementById('authSection').classList.remove('hidden');
+    } else {
+      msg.textContent = "❌ Access Key salah!";
+      msg.classList.remove('hidden');
+    }
+  }
+
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const user = document.getElementById('registerUsername').value.trim();
+    const pass = document.getElementById('registerPassword').value;
+    const msg = document.getElementById('authMessage');
+    if (pass.length < 4 || pass.length > 8) {
+      msg.textContent = "⚠️ Password harus 4-8 karakter.";
+      msg.classList.remove('hidden');
+      return;
+    }
+    localStorage.setItem(`user:${user}`, pass);
+    msg.textContent = "✅ Registrasi berhasil. Silakan login.";
+    msg.classList.remove('hidden');
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const user = document.getElementById('loginUsername').value.trim();
+    const pass = document.getElementById('loginPassword').value;
+    const stored = localStorage.getItem(`user:${user}`);
+    const msg = document.getElementById('authMessage');
+    if (stored && stored === pass) {
+      document.getElementById('authSection').classList.add('hidden');
+      document.getElementById('appSection').classList.remove('hidden');
+    } else {
+      msg.textContent = "❌ Login gagal. Username atau password salah.";
+      msg.classList.remove('hidden');
+    }
+  });
+
+  document.getElementById('botForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const botName = document.getElementById('botName').value.trim();
+    const fiturChecked = document.querySelectorAll('.featureCheck:checked');
+    const prosesList = document.getElementById('prosesList');
+    const basePath = `script/${botName || "botwa"}/`;
+    prosesList.innerHTML = `<li>📁 ${basePath}</li><li>📁 ${basePath}fitur/</li>`;
+    fiturChecked.forEach(input => {
+      prosesList.innerHTML += `<li class="ml-6">📁 ${basePath}fitur/${input.value}/</li>`;
+    });
+
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const countdownTimer = document.getElementById('countdownTimer');
+    progressContainer.classList.remove('hidden');
+
+    const randomDelay = Math.floor(Math.random() * (5 - 2 + 1) + 2) * 10;
+    let timeLeft = randomDelay;
+
+    const interval = setInterval(() => {
+      timeLeft--;
+      const progress = ((randomDelay - timeLeft) / randomDelay) * 100;
+      progressBar.style.width = `${progress}%`;
+      countdownTimer.textContent = `⏳ Membuat script... ${timeLeft} detik tersisa`;
+
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        progressBar.style.width = `100%`;
+        countdownTimer.textContent = "✅ Pembuatan script selesai!";
+        const doneList = document.getElementById('doneList');
+        const doneItem = document.createElement('li');
+        doneItem.textContent = `✅ Script ${botName || "Bot"} berhasil disiapkan dengan ${fiturChecked.length} fitur.`;
+        doneList.appendChild(doneItem);
+        document.getElementById('result').classList.remove('hidden');
+
+        // Auto download file simulasi
+        const blob = new Blob(["Contoh isi script bot WhatsApp"], { type: "application/zip" });
+        const url = URL.createObjectURL(blob);
+        const downloadLink = document.getElementById('downloadLink');
+        downloadLink.href = url;
+        downloadLink.click();
+
+        showTab('tab-done');
+      }
+    }, 1000);
+
+    showTab('tab-proses');
+  });
+</script>
+</body>
+</html>
